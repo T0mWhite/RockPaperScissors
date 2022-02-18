@@ -59,7 +59,6 @@ function startRound() {
   } else if (compThrow === 16) {
     compThrow = 'bomb';
   }
-  compThrow = 'bomb';
 
   // Ask the player for their throw
   let playerThrow = prompt(
