@@ -44,40 +44,53 @@ if (answer.toLowerCase() === 'yes') {
     }
 
     // Ask the player for their throw
-    let playerThrow = prompt('Choose rock, paper, or scissors... or maybe there\'s a better choice?');
+    let playerThrow = prompt(
+      "Choose rock, paper, or scissors... or maybe there's a better choice?"
+    );
     // Sanitize the throw
     playerThrow = playerThrow.toLowerCase();
 
     // Compare the comp throw to the player throw
+    //   Tie
     if (compThrow === playerThrow) {
       console.log(
         tieScore++,
         `Computer threw ${compThrow}, and you threw ${playerThrow}. The round was a tie! \n Current score: ${name}: ${playerScore}, Computer: ${compScore}, Tie: ${tieScore}`
       );
+      //   Rock beats paper
     } else if (compThrow === 'rock' && playerThrow !== 'paper') {
       console.log(
         compScore++,
         `Computer threw ${compThrow}, and you threw ${playerThrow}. You've lost this round!  \n Current score: ${name}: ${playerScore}, Computer: ${compScore}, Tie: ${tieScore}`
       );
+      //   Paper beats scissors
     } else if (compThrow === 'paper' && playerThrow !== 'scissors') {
       console.log(
         compScore++,
         `Computer threw ${compThrow}, and you threw ${playerThrow}. You've lost this round!  \n Current score: ${name}: ${playerScore}, Computer: ${compScore}, Tie: ${tieScore}`
       );
+      //   Scissors beats rock
     } else if (compThrow === 'scissors' && playerThrow !== 'rock') {
       console.log(
         compScore++,
         `Computer threw ${compThrow}, and you threw ${playerThrow}. You've lost this round!  \n Current score: ${name}: ${playerScore}, Computer: ${compScore}, Tie: ${tieScore}`
       );
+      //   Player who threw bomb wins and ends the game
     } else if (compThrow === 'bomb') {
       console.log(
         `Computer threw ${compThrow}! Computer blew you up! Game over!`
       );
     } else if (playerThrow === 'bomb') {
-        console.log(
-          `You threw ${playerThrow}! You blew up the computer and won! Game over!`
-        );
+      console.log(
+        `You threw ${playerThrow}! You blew up the computer and won! Game over!`
+      );
+    //   Tie bomb ends the game with no winners
+    } else if (playerThrow === 'bomb' && compThrow === 'bomb') {
+      console.log(
+        `Two bombs enter, no one leaves... Game over!`
+      );
     } else {
+      // Player wins if none of the comp throws win
       return console.log(
         playerScore++,
         `Computer threw ${compThrow}, and you threw ${playerThrow}. Nice! You've won this round!`
@@ -93,13 +106,6 @@ if (answer.toLowerCase() === 'yes') {
   endGame();
 }
 
-// Player is asked to send their throw through the console.
-// Player commands can be "rock", "paper", "scissors", or "bomb". Commands are not case sensitive.
-// Player command is compared to computer command.
-// Rock beats scissors
-// Scissors beats paper
-// Paper beats rock
-// Bomb beats all commands
 // If both parties throw bomb, an eerie message is displayed
 // If player wins, print this to the console
 // If computer wins, print this to the console
