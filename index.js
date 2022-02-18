@@ -59,7 +59,7 @@ function startRound() {
   } else if (compThrow === 16) {
     compThrow = 'bomb';
   }
-  // compThrow = 'bomb';
+  compThrow = 'bomb';
 
   // Ask the player for their throw
   let playerThrow = prompt(
@@ -80,12 +80,14 @@ function startRound() {
       `Computer threw ${compThrow}! Computer blew you up! Game over!`
     );
     roundCount = 0;
+    compScore++
     roundCheck();
   } else if (playerThrow === 'bomb') {
     console.log(
       `You threw ${playerThrow}! You blew up the computer and won! Game over!`
     );
     roundCount = 0;
+    playerScore++
     roundCheck();
     //   Tie bomb ends the game with no winners
   } else if (compThrow === playerThrow) {
