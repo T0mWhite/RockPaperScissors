@@ -1,6 +1,6 @@
 // Rock, Paper, Scissors logic
 
-// Player is playing a game against a computer.
+// Player is playing a game against a computer for 5 rounds.
 
 // Game logic
 let compScore = 0;
@@ -15,18 +15,18 @@ function endGame() {
 }
 
 // On load, ask for player name
-let name = prompt('Please enter your name:');
+let playerName = prompt('Please enter your name:');
 // Sanitize the player name
-name = name[0].toUpperCase() + name.substring(1);
+playerName = playerName[0].toUpperCase() + playerName.substring(1);
 // Send console greeting with player name and ask player if they would like to play rock, paper, scissors
 const answer = prompt(
-  `Welcome ${name}, are you ready to play Rock Paper Scissors? There are 5 rounds! Type yes or no.`
+  `Welcome ${playerName}, are you ready to play Rock Paper Scissors? There are 5 rounds! Type yes or no.`
 );
 
 // If yes, commence game
 if (answer.toLowerCase() === 'yes') {
   //   Initialize round count
-  let roundCount = 0;
+  roundCount = 0;
 
   //   Begin game
   startRound();
@@ -42,23 +42,27 @@ function startRound() {
 
   let compThrow;
 
-  // Call the computer's throw fucntion
-  getCompThrow();
-
   // Function to get the computer's throw
   function getCompThrow() {
     compThrow = Math.floor(Math.random() * 16 + 1);
   }
 
+  // Call the computer's throw function
+  getCompThrow();
+
+  // Make the computer's throw a readable string
   if (compThrow >= 1 && compThrow <= 6) {
     compThrow = 'rock';
   } else if (compThrow > 6 && compThrow <= 12) {
     compThrow = 'paper';
   } else if (compThrow > 12 && compThrow <= 15) {
     compThrow = 'scissors';
+    // Rare occurence of computer throwing bomb
   } else if (compThrow === 16) {
     compThrow = 'bomb';
   }
+
+
 
   // Ask the player for their throw
   let playerThrow = prompt(
@@ -67,60 +71,62 @@ function startRound() {
   // Sanitize the throw
   playerThrow = playerThrow.toLowerCase();
 
+
+
   // Compare the comp throw to the player throw
-  //   Tie
-  //   Player who threw bomb wins and ends the game
+  //   Bomb tie ends with no winner
   if (playerThrow === 'bomb' && compThrow === 'bomb') {
     console.log(`Two bombs enter, no one leaves... Game over!`);
     roundCount = 0;
     roundCheck();
+    //   If player/comp throws bomb, they win and end the game
   } else if (compThrow === 'bomb') {
     console.log(
       `Computer threw ${compThrow}! Computer blew you up! Game over!`
     );
     roundCount = 0;
-    compScore++
+    compScore++;
     roundCheck();
   } else if (playerThrow === 'bomb') {
     console.log(
       `You threw ${playerThrow}! You blew up the computer and won! Game over!`
     );
     roundCount = 0;
-    playerScore++
+    playerScore++;
     roundCheck();
-    //   Tie bomb ends the game with no winners
+    //   Tie throws
   } else if (compThrow === playerThrow) {
     tieScore++;
     console.log(
-      `Computer threw ${compThrow}, and you threw ${playerThrow}. Round ${roundCount} was a tie! \n Current score: ${name}: ${playerScore}, Computer: ${compScore}, Tie: ${tieScore}`
+      `Computer threw ${compThrow}, and you threw ${playerThrow}. Round ${roundCount} was a tie! \n Current score: ${playerName}: ${playerScore}, Computer: ${compScore}, Tie: ${tieScore}`
     );
     roundCheck();
     //   Rock beats paper
   } else if (compThrow === 'rock' && playerThrow !== 'paper') {
     compScore++;
     console.log(
-      `Computer threw ${compThrow}, and you threw ${playerThrow}. You've lost round ${roundCount}!  \n Current score: ${name}: ${playerScore}, Computer: ${compScore}, Tie: ${tieScore}`
+      `Computer threw ${compThrow}, and you threw ${playerThrow}. You've lost round ${roundCount}!  \n Current score: ${playerName}: ${playerScore}, Computer: ${compScore}, Tie: ${tieScore}`
     );
     roundCheck();
     //   Paper beats scissors
   } else if (compThrow === 'paper' && playerThrow !== 'scissors') {
     compScore++;
     console.log(
-      `Computer threw ${compThrow}, and you threw ${playerThrow}. You've lost round ${roundCount}!  \n Current score: ${name}: ${playerScore}, Computer: ${compScore}, Tie: ${tieScore}`
+      `Computer threw ${compThrow}, and you threw ${playerThrow}. You've lost round ${roundCount}!  \n Current score: ${playerName}: ${playerScore}, Computer: ${compScore}, Tie: ${tieScore}`
     );
     roundCheck();
     //   Scissors beats rock
   } else if (compThrow === 'scissors' && playerThrow !== 'rock') {
     compScore++;
     console.log(
-      `Computer threw ${compThrow}, and you threw ${playerThrow}. You've lost round ${roundCount}!  \n Current score: ${name}: ${playerScore}, Computer: ${compScore}, Tie: ${tieScore}`
+      `Computer threw ${compThrow}, and you threw ${playerThrow}. You've lost round ${roundCount}!  \n Current score: ${playerName}: ${playerScore}, Computer: ${compScore}, Tie: ${tieScore}`
     );
     roundCheck();
   } else {
     // Player wins if none of the comp throws win
     playerScore++;
     console.log(
-      `Computer threw ${compThrow}, and you threw ${playerThrow}. Nice! You've won round ${roundCount}!   \n Current score: ${name}: ${playerScore}, Computer: ${compScore}, Tie: ${tieScore}`
+      `Computer threw ${compThrow}, and you threw ${playerThrow}. Nice! You've won round ${roundCount}!   \n Current score: ${playerName}: ${playerScore}, Computer: ${compScore}, Tie: ${tieScore}`
     );
     roundCheck();
   }
@@ -140,5 +146,3 @@ function roundCheck() {
     }
   }
 }
-
-// Console message refresh to play again
