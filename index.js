@@ -76,23 +76,23 @@ function startRound() {
   // Compare the comp throw to the player throw
   //   Bomb tie ends with no winner
   if (playerThrow === 'bomb' && compThrow === 'bomb') {
-    console.log(`Two bombs enter, no one leaves... Game over!`);
+    console.log(`You and the computer both threw bombs. Two bombs enter, no one leaves... Game over!`);
     roundCount = 0;
     roundCheck();
     //   If player/comp throws bomb, they win and end the game
   } else if (compThrow === 'bomb') {
     console.log(
-      `Computer threw ${compThrow}! Computer blew you up! Game over!`
+      `Computer threw ${compThrow}! Computer blew you up!`
     );
     roundCount = 0;
-    compScore++;
+    compScore = 10;
     roundCheck();
   } else if (playerThrow === 'bomb') {
     console.log(
-      `You threw ${playerThrow}! You blew up the computer and won! Game over!`
+      `You threw ${playerThrow}! You blew up the computer!`
     );
     roundCount = 0;
-    playerScore++;
+    playerScore = 10;
     roundCheck();
     //   Tie throws
   } else if (compThrow === playerThrow) {
